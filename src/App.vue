@@ -37,6 +37,7 @@ export default defineComponent({
       temp.value = [];
       calcTemp.value = [];
       console.clear();
+       resultData.value = null
     };
     const calcOperator = (action: string) => {
       let test = +temp.value.join("");
