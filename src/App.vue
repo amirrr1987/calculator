@@ -1,12 +1,15 @@
 <template>
-  <div class="answer">{{monitorData}}</div>
+  <div class="answer">
+    <div >{{ monitorData }}</div>
+    <div >result : {{ resultData }}</div>
+  </div>
   <button @click="cleaner" class="btn btn__action btn__c">c</button>
-  <button class="btn btn__action btn__/">/</button>
-  <button class="btn btn__action btn__=">=</button>
-  <button class="btn btn__action btn__*">*</button>
-  <button class="btn btn__action btn__-">-</button>
-  <button class="btn btn__action btn__+">+</button>
+  <button @click="calcOperator('/')" class="btn btn__action btn__/">/</button>
+  <button @click="calcOperator('*')" class="btn btn__action btn__*">*</button>
+  <button @click="calcOperator('-')" class="btn btn__action btn__-">-</button>
+  <button @click="calcOperator('+')" class="btn btn__action btn__+">+</button>
   <button class="btn btn__action btn__.">.</button>
+  <button @click="calcData" class="btn btn__action btn__=">=</button>
   <button @click="getNumber(9)" class="btn btn__number btn__9">9</button>
   <button @click="getNumber(8)" class="btn btn__number btn__8">8</button>
   <button @click="getNumber(7)" class="btn btn__number btn__7">7</button>
@@ -24,24 +27,53 @@ import { computed, defineComponent, ref } from "vue";
 export default defineComponent({
   name: "TheApp",
   setup() {
-    const temp = ref<any>([])
+    const temp = ref<any>([]);
+    const calcTemp = ref<any>([]);
     const getNumber = (number: any) => {
       temp.value.push(number);
-      console.log(number);
-      console.log(temp.value.join(''));
-      
+      console.log(temp.value.join(""));
     };
-    const cleaner=()=>{
-      temp.value = []
-    }
-    const monitorData = computed(()=>{
-      return (+temp.value.join('')).toLocaleString()
-    })
+    const cleaner = () => {
+      temp.value = [];
+      calcTemp.value = [];
+      console.clear();
+    };
+    const calcOperator = (action: string) => {
+      let test = +temp.value.join("");
+      calcTemp.value.push(test);
+      calcTemp.value.push(action);
+      console.log(calcTemp.value);
+      temp.value = [];
+       resultData.value = null
+    };
+    // const monitorData = computed(() => {
+    //   return (+temp.value.join("")).toLocaleString();
+    // });
+
+    const monitorData = computed({
+      set: (value: any) => {
+        temp.value = +value;
+      },
+      get: () => {
+        return (+temp.value.join("")).toLocaleString();
+      },
+    });
+    const resultData = ref()
+    const calcData = () => {
+      let test = +temp.value.join("");
+      calcTemp.value.push(test);
+      console.log(eval(calcTemp.value.join("")));
+
+      resultData.value = eval(calcTemp.value.join(""));
+    };
+
     return {
       getNumber,
       cleaner,
+      calcOperator,
       monitorData,
-
+      calcData,
+      resultData
     };
   },
 });
@@ -53,7 +85,7 @@ export default defineComponent({
   grid-template-rows: repeat(8, 1fr);
 }
 .answer {
-  @apply bg-[#7b7c92] col-start-1 col-end-5 row-start-1 row-end-4 text-5xl p-5;
+  @apply bg-[#7b7c92] col-start-1 col-end-5 row-start-1 row-end-4 text-4xl p-5 break-words grid capitalize;
   box-shadow: inset 0px 0px 4px #1e1f20, -2px -2px 10px #979393;
 }
 .btn {
