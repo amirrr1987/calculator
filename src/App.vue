@@ -22,11 +22,17 @@
   <button @click="getNumber(0)" class="btn btn__number btn__0">0</button>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, watchEffect, } from "vue";
 
 export default defineComponent({
   name: "TheApp",
   setup() {
+    let vh = computed(()=> window.innerHeight * 0.01);
+    
+
+    watchEffect(()=> document.documentElement.style.setProperty('--vh', `${vh.value}px`))
+
+
     const temp = ref<any>([]);
     const calcTemp = ref<any>([]);
     const getNumber = (number: any) => {
@@ -84,6 +90,7 @@ export default defineComponent({
   @apply h-screen grid gap-4 p-4 text-white bg-[#60627b];
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(8, 1fr);
+  height: calc(var(--vh, 1vh) * 100);
 }
 .answer {
   @apply bg-[#7b7c92] col-start-1 col-end-5 row-start-1 row-end-4 text-4xl p-5 break-words grid capitalize;
