@@ -27,11 +27,17 @@ import { computed, defineComponent, ref, watchEffect } from "vue";
 export default defineComponent({
   name: "TheApp",
   setup() {
+    const setViewHeight = () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
     const vh = computed(() => window.innerHeight * 0.01);
-
-    watchEffect(() =>
-      document.documentElement.style.setProperty("--vh", `${vh.value}px`)
-    );
+    watchEffect(() => {
+      setViewHeight();
+      window.addEventListener("resize", () => {
+        setViewHeight();
+      });
+    });
 
     const dataResult = ref("");
     const addToCalc = (dataString: string) => {
@@ -50,7 +56,6 @@ export default defineComponent({
       calcData,
       addToCalc,
       dataResult,
-      vh
     };
   },
 });
