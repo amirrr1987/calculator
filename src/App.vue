@@ -103,7 +103,7 @@ function calculateResult() {
     }
   })
 
-  numbers.value.push(result)
+  numbers.value.push(result.toString())
 
   // cleaner()
 }
