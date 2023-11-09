@@ -60,7 +60,8 @@ const result = ref('')
 
 const itemIndex = ref<number>(0)
 const stack = ref<string[]>([''])
-function calculateResult() {
+const calculateResult = () => {
+  if (numbers.value.length === 0) return
   numbers.value.push('=')
   numbers.value.forEach((item) => {
     if (toNumber(item)) {
