@@ -34,6 +34,7 @@ const getNumber = (number: string) => {
 }
 
 const setMethod = (method: string) => {
+  if (numbers.value.length === 0) return
   const lastItem = last(numbers.value)
   if (lastItem === '+' || lastItem === '-' || lastItem === '/' || lastItem === '*') {
     numbers.value.pop()
