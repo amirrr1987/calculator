@@ -1,26 +1,22 @@
 <template>
-  <!-- <div class="col-span-full">
-          <template v-for="item in numbers">{{ item }}</template>
-          {{ result }}
-        </div> -->
   <TheResult class="col-span-full row-span-3" :result="numbers" />
-  <TheButton class="btn" @click="cleaner" label="C" />
-  <TheButton @click="setMethod('/')" class="btn" label="/" />
-  <TheButton @click="setMethod('*')" class="btn" label="*" />
-  <TheButton @click="setMethod('-')" class="btn" label="-" />
-  <TheButton @click="getNumber('7')" class="btn" label="7" />
-  <TheButton @click="getNumber('8')" class="btn" label="8" />
-  <TheButton @click="getNumber('9')" class="btn" label="9" />
-  <TheButton @click="setMethod('+')" class="btn" label="+" />
-  <TheButton @click="getNumber('4')" class="btn" label="4" />
-  <TheButton @click="getNumber('5')" class="btn" label="5" />
-  <TheButton @click="getNumber('6')" class="btn" label="6" />
-  <TheButton @click="calculateResult" class="btn row-span-3" label="=" />
-  <TheButton @click="getNumber('1')" class="btn" label="1" />
-  <TheButton @click="getNumber('2')" class="btn" label="2" />
-  <TheButton @click="getNumber('3')" class="btn" label="3" />
-  <TheButton @click="getNumber('0')" class="btn col-span-2" label="0" />
-  <TheButton @click="getNumber('.')" class="btn" label="." />
+  <TheButton @click="cleaner" label="C" />
+  <TheButton @click="setMethod('/')" label="/" />
+  <TheButton @click="setMethod('*')" label="*" />
+  <TheButton @click="setMethod('-')" label="-" />
+  <TheButton @click="getNumber('7')" label="7" />
+  <TheButton @click="getNumber('8')" label="8" />
+  <TheButton @click="getNumber('9')" label="9" />
+  <TheButton @click="setMethod('+')" label="+" />
+  <TheButton @click="getNumber('4')" label="4" />
+  <TheButton @click="getNumber('5')" label="5" />
+  <TheButton @click="getNumber('6')" label="6" />
+  <TheButton @click="calculateResult" class="row-span-3" label="=" />
+  <TheButton @click="getNumber('1')" label="1" />
+  <TheButton @click="getNumber('2')" label="2" />
+  <TheButton @click="getNumber('3')" label="3" />
+  <TheButton @click="getNumber('0')" class="col-span-2" label="0" />
+  <TheButton @click="getNumber('.')" label="." />
 </template>
 <script setup lang="ts">
 import TheButton from '@/components/TheButton.vue'
@@ -29,10 +25,18 @@ import { ref } from 'vue'
 import { cloneDeep, last, findLastIndex, isNumber, toNumber } from 'lodash'
 const numbers = ref<string[]>([])
 const temp = ref('')
+/**
+ * Adds a number to the numbers array.
+ * @param {string} number - The number to be added.
+ */
 const getNumber = (number: string) => {
   numbers.value.push(number)
 }
 
+/**
+ * Sets the method for the calculation.
+ * @param {string} method - The method to be set.
+ */
 const setMethod = (method: string) => {
   if (numbers.value.length === 0) return
   const lastItem = last(numbers.value)
@@ -42,8 +46,13 @@ const setMethod = (method: string) => {
   numbers.value.push(method)
 }
 
-const isMethod = (item: string) => {
-  switch (item) {
+/**
+ * Checks if a given string is a valid mathematical operator (+, -, *, /).
+ * @param {string} method - The string to check.
+ * @returns {boolean} - True if the string is a valid operator, false otherwise.
+ */
+const isMethod = (method: string) => {
+  switch (method) {
     case '-':
       return true
     case '+':
@@ -54,7 +63,6 @@ const isMethod = (item: string) => {
       return true
   }
 }
-// write method to calculator result numbers width methods
 
 const result = ref('')
 
@@ -113,11 +121,10 @@ const calculateResult = () => {
 const cleaner = () => (numbers.value = [])
 </script>
 <style>
-html {
-}
 body {
   @apply p-0 m-0;
 }
+
 #app {
   @apply grid grid-cols-4 grid-rows-8 gap-4 p-4 overflow-hidden;
   height: 100svh;
