@@ -1,5 +1,5 @@
 <template>
-  <TheResult class="col-span-full row-span-3" :result="numbers" />
+  <TheResult class="col-span-full row-span-4" :result="numbers" />
   <TheButton @click="cleaner" label="C" />
   <TheButton @click="setMethod" label="/" />
   <TheButton @click="setMethod" label="*" />
@@ -29,7 +29,7 @@ body {
 }
 
 #app {
-  @apply grid grid-cols-4 grid-rows-8 gap-4 p-4 overflow-hidden;
+  @apply grid grid-cols-4 grid-rows-9 gap-4 p-4 overflow-hidden;
   height: 100svh;
 }
 </style>
