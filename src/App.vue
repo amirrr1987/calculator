@@ -11,7 +11,7 @@
   <TheButton @click="getNumber" label="4" />
   <TheButton @click="getNumber" label="5" />
   <TheButton @click="getNumber" label="6" />
-  <TheButton @click="calculateResult" class="row-span-3 text-green" label="=" />
+  <TheButton @click="calculateResult" class="row-span-3 text-success" label="=" />
   <TheButton @click="getNumber" label="1" />
   <TheButton @click="getNumber" label="2" />
   <TheButton @click="getNumber" label="3" />
