@@ -1,0 +1,28 @@
+{
+  "background_color": "#ffffff",
+  "description": "Vue.js Calculator Neumorphism",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Calculator",
+  "orientation": "portrait",
+  "scope": "/",
+  "short_name": "Calculator",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "categories": [
+    "education",
+    "utilities"
+  ],
+  "screenshots": [],
+  "icons": [
+    {
+      "src": "/favicon.ico"
+    },
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": [],
+  "lang": "en"
+}
