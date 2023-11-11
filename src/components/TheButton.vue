@@ -11,7 +11,8 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 <style>
 .btn {
-  @apply text-3xl text-gray-500 border-0 font-bold;
+  @apply text-3xl text-gray-500 border-0 font-bold ;
+  aspect-ratio: 1 / 1;
 }
 .btn-primary:focus,
 .btn-primary.focus {
