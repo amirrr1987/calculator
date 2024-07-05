@@ -1,16 +1,14 @@
 <template>
   <div class="card bg-primary shadow-inset border-light p-4 text-4xl font-bold max-h-max overflow-auto">
-    <template v-for="item in props.result">
-      {{ item }}
-    </template>
+    {{props.result}}
   </div>
 </template>
 <script setup lang="ts">
 interface Props {
-  result: string[]
+  result: string
 }
 const props = withDefaults(defineProps<Props>(), {
-  result: () => []
+  result: ''
 })
 </script>
 <style></style>
