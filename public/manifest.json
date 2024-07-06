@@ -1,6 +1,6 @@
 {
   "background_color": "#ffffff",
-  "description": "Vue.js Calculator Neumorphism",
+  "description": "Vue.js PWA Calculator Neumorphism",
   "dir": "ltr",
   "display": "fullscreen",
   "name": "Calculator",
@@ -36,5 +36,6 @@
     }
   ],
   "shortcuts": [],
-  "lang": "en"
+  "lang": "en",
+  "display_override": ["window-controls-overlay"],
 }
