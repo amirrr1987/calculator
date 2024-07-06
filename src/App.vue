@@ -33,13 +33,24 @@ const lastCharIsMethod = computed(() => {
     expression.value.endsWith('/')
   )
 })
+function replaceLastChar(str: string, newChar: string) {
+  if (str.length === 0) {
+    return str
+  }
+  return str.slice(0, -1) + newChar
+}
 
 const appendCharacter = (e: any) => {
   const char = e.target.value
+  if (lastCharIsMethod.value) {
+    expression.value = replaceLastChar(expression.value, e.target.value)
+    return
+  }
   if (char === '.' && lastCharIsMethod.value) {
     expression.value += '0' + char
     return
   }
+
   if (expression.value.endsWith('.') && char === '.') {
     return
   }
