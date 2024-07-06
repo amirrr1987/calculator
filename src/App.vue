@@ -25,14 +25,15 @@ import TheResult from '@/components/TheResult.vue'
 import { computed, ref } from 'vue'
 
 const expression = ref('')
-const lastCharIsMethod = computed(() => {
-  return (
-    expression.value.endsWith('+') ||
-    expression.value.endsWith('-') ||
-    expression.value.endsWith('*') ||
-    expression.value.endsWith('/')
-  )
-})
+const lastCharIsMethod = () => {
+  if (expression.value.length === 0) return false
+  expression.value = String(expression.value)
+  if (expression.value.slice(0, -1) === '+') return true
+  if (expression.value.slice(0, -1) === '-') return true
+  if (expression.value.slice(0, -1) === '/') return true
+  if (expression.value.slice(0, -1) === '*') return true
+  return false
+}
 function replaceLastChar(str: string, newChar: string) {
   if (str.length === 0) {
     return str
@@ -42,11 +43,11 @@ function replaceLastChar(str: string, newChar: string) {
 
 const appendCharacter = (e: any) => {
   const char = e.target.value
-  if (lastCharIsMethod.value) {
+  if (lastCharIsMethod()) {
     expression.value = replaceLastChar(expression.value, e.target.value)
     return
   }
-  if (char === '.' && lastCharIsMethod.value) {
+  if (char === '.' && lastCharIsMethod()) {
     expression.value += '0' + char
     return
   }
@@ -62,7 +63,7 @@ const appendCharacter = (e: any) => {
 }
 
 const calculateResult = () => {
-  if (lastCharIsMethod.value) {
+  if (lastCharIsMethod()) {
     expression.value = expression.value.slice(0, -1)
   }
   try {
